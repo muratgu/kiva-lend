@@ -44,7 +44,7 @@ const { chromium } = require('playwright');
   const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
   console.log('Amount left = ' + amount)
 
-  if (Number(amount) > 25) {
+  if (Number(amount) >= 25) {
     console.log('Search')
     const filter = 'country=kg,tj&gender=female&sector=1&sortBy=amountLeft'
     await page.goto('https://www.kiva.org/lend/?' + filter)
