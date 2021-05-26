@@ -1,6 +1,13 @@
 const { chromium } = require('playwright');
 
 (async () => {
+
+  const for_real = process.argv.find(x => x == '--for-real')
+  console.log(for_real?'For real':'Dry run (--for-real to turn off)')
+
+  const headly = process.argv.find(x => x == '--headly')
+  console.log(headly?'Headly':'Headless (--headly to turn off)')
+
   if (process.env.EMAIL && process.env.PASSWORD) {
     //ok
   } else {
@@ -10,7 +17,7 @@ const { chromium } = require('playwright');
 
   console.log('Launch browser')
   const browser = await chromium.launch({
-    headless: false
+    headless: !headly
   });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -39,10 +46,17 @@ const { chromium } = require('playwright');
 
   if (Number(amount) > 25) {
     console.log('Search')
-    await page.goto('https://www.kiva.org/lend?sector=1,12,8&sortBy=amountLeft')
-    await page.waitForTimeout(3000);
+    const filter = 'country=kg,tj&gender=female&sector=1&sortBy=amountLeft'
+    await page.goto('https://www.kiva.org/lend/?' + filter)
+    await page.waitForTimeout(1500);
   
-    console.log('Lend $25 to first one')
+    const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
+    const borrower_country = await (await page.textContent('.loan-card-2-country')).trim()
+    const borrower_use = await (await page.textContent('.loan-card-2-use')).trim()
+
+    console.log(`${borrower_name} from ${borrower_country}. ${borrower_use}`)
+
+    console.log('Lend $25')
     await page.click('text=Lend $25');
 
     console.log('Checkout now')
@@ -56,11 +70,22 @@ const { chromium } = require('playwright');
     await page.click('text=$3.75 Edit Donation');
     // Click text=No donation to Kiva
     await page.click('text=No donation to Kiva');
+    await page.waitForTimeout(1500);
+
+    const total_value = await (await page.textContent('.total-value')).replace('(','').replace(')','')
+    console.log(`Total value ${total_value}`)
+    if (total_value != '$25.00') {    
+      console.log('Total value expected to be $25.00')
+      process.exit(-1)
+    }
 
     console.log('Complete order')
-    await page.click('button#kiva-credit-payment-button');
-    await page.waitForTimeout(3000);
-
+    if (for_real) {
+      await page.click('button#kiva-credit-payment-button');
+      await page.waitForTimeout(1500);
+    } else {
+      console.log('(DRYRUN) click button#kiva-credit-payment-button');
+    }
   } else {
     console.log('Not enough funds to lend')
   }
