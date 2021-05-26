@@ -5,8 +5,8 @@ const { chromium } = require('playwright');
   const for_real = process.argv.find(x => x == '--for-real')
   console.log(for_real?'For real':'Dry run (--for-real to turn off)')
 
-  const headly = process.argv.find(x => x == '--headly')
-  console.log(headly?'Headly':'Headless (--headly to turn off)')
+  const headfull = process.argv.find(x => x == '--headfull')
+  console.log(headfull?'Headfull':'Headless (--headfull to turn off)')
 
   if (process.env.EMAIL && process.env.PASSWORD) {
     //ok
@@ -17,7 +17,7 @@ const { chromium } = require('playwright');
 
   console.log('Launch browser')
   const browser = await chromium.launch({
-    headless: !headly
+    headless: !headfull
   });
   const context = await browser.newContext();
   const page = await context.newPage();
