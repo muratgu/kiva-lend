@@ -46,7 +46,7 @@ const { chromium } = require('playwright');
 
   if (Number(amount) >= 25) {
     console.log('Search')
-    const filter = 'country=kg,tj&gender=female&sector=1&sortBy=amountLeft'
+    const filter = 'country=kg,tj&sector=1&sortBy=amountLeft'
     await page.goto('https://www.kiva.org/lend/?' + filter)
     await page.waitForTimeout(1500);
   
@@ -91,8 +91,8 @@ const { chromium } = require('playwright');
   }
 
   console.log('Sign out')
-  await page.goto('https://www.kiva.org/ui-logout')
+  await page.goto('https://www.kiva.org/logout')
 
-  await context.close();
-  await browser.close();
+  await context.close()
+  await browser.close()
 })();
