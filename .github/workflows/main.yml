@@ -10,4 +10,4 @@ jobs:
       PASSWORD: invalid
     steps:
       - name: "Run kiva"
-        run: node kiva.js
+        run: npm run test
