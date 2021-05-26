@@ -3,11 +3,14 @@ on:
   workflow_dispatch:    
 
 jobs:
-  weekday_job:
+  build:
     runs-on: ubuntu-latest
     env:
       EMAIL: mgungora@gmail.com
       PASSWORD: invalid
     steps:
-      - name: "Hello world when it's Monday"
-        run: npm run test
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12
+      - run: npm test      
