@@ -1,10 +1,10 @@
 {
   "name": "kivabot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Autolends $25 to first kiva loan found",
   "main": "kiva.js",
   "scripts": {
-    "test": "node kiva.js"
+    "lend": "node kiva.js"
   },
   "author": "",
   "license": "ISC",
