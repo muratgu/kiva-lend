@@ -1,6 +1,9 @@
 const { chromium } = require('playwright');
+const dotenv = require('dotenv');
 
 (async () => {
+
+  dotenv.config()
 
   const for_real = process.argv.find(x => x == '--for-real')
   console.log(for_real?'For real':'Dry run (--for-real to turn off)')
@@ -36,10 +39,13 @@ const { chromium } = require('playwright');
   await page.fill('input[name="email"]', process.env.EMAIL);
   await page.press('input[name="email"]', 'Tab');
   await page.fill('input[name="password"]', process.env.PASSWORD);
-  await Promise.all([
-    page.waitForNavigation(),
-    page.press('input[name="password"]', 'Enter')
-  ]);
+  await page.press('input[name="password"]', 'Enter');
+  await page.waitForTimeout(500);
+  const server_errors = await (await page.$('ul.server-errors')).innerText();
+  if (server_errors) {
+    console.log(server_errors);
+    process.exit(-1)
+  }
 
   const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
   console.log('Amount left = ' + amount)
