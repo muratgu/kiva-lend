@@ -41,11 +41,6 @@ const dotenv = require('dotenv');
   await page.fill('input[name="password"]', process.env.PASSWORD);
   await page.press('input[name="password"]', 'Enter');
   await page.waitForTimeout(500);
-  const server_errors = await (await page.$('ul.server-errors')).innerText();
-  if (server_errors) {
-    console.log(server_errors);
-    process.exit(-1)
-  }
 
   const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
   console.log('Amount left = ' + amount)
