@@ -2,7 +2,6 @@ const { chromium } = require('playwright');
 const dotenv = require('dotenv');
 const figlet = require('figlet')
 const clear = require('clear')
-const clui = require('clui')
 const chalk = require('chalk')
 const log = console.log;
 
