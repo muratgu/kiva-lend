@@ -97,7 +97,7 @@ const log = console.log;
       if (!quiet) log(chalk.red('(DRYRUN) click button#kiva-credit-payment-button'));
     }
   } else {
-    log(chalk.red(`Info: $${amount} available is not enough to lend`));
+    log(chalk.red(`Info: $${amount} not enough to lend`));
   }
 
   if (!quiet) log(chalk.green('Signing out'))
