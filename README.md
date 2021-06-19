@@ -6,8 +6,14 @@ If amount is available, it lends $25 to first loan applicant found. See kiva.js 
 
 Usage:
 
-\> set EMAIL=\<your kiva email\>
+`\> set EMAIL=\<your kiva email\>`
 
-\> set PASSWORD=\<your kiva password\>
+`\> set PASSWORD=\<your kiva password\>`
 
-\> node kiva.js
+or, create a `.env` file
+`EMAIL=\<your kiva email\>`
+`PASSWORD=\<your kiva password\>`
+
+and run
+
+`\> node kiva.js`
