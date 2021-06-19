@@ -23,6 +23,7 @@ and run
 ```console
 node kiva.js
 ```
+The above will do a dry-run. It will tell you if it found a loan to lend but will not lend unless you specify `--for-real` when you invoke the script.
 
 # Example
 ```pre
