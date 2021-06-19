@@ -23,16 +23,34 @@ const log = console.log;
     
     if (!quiet) log(chalk.blue('--quiet to turn off verbosity'));
 
-    if (process.env.EMAIL && process.env.PASSWORD) {
+    if (process.env.KIVA_EMAIL) {
       //ok
     } else {
-      log(chalk.red('Error: EMAIL and PASSWORD required'));
+      log(chalk.red('Error: KIVA_EMAIL is required'));
       process.exit(-1)
     }
 
-    const lendingAmount = 25 // set the amount to lend here
-    const lendingCriteria = '&sortBy=amountLeft' // set your own criteria here
+    if (process.env.KIVA_PASSWORD) {
+      //ok
+    } else {
+      log(chalk.red('Error: KIVA_PASSWORD is required'));
+      process.exit(-1)
+    }
 
+    if (process.env.KIVA_CRITERIA) {
+      //ok
+    } else {
+      log(chalk.red('Error: KIVA_CRITERIA is required'));
+      process.exit(-1)
+    }
+
+    const kivaEmail = process.env.KIVA_EMAIL
+    const kivaPassword = process.env.KIVA_PASSWORD
+    const lendingAmount = 25 // set the amount to lend here
+    const lendingCriteria = process.env.KIVA_CRITERIA
+
+    if (!quiet) log(chalk.green(`Lending amount is [${lendingAmount}]`))
+    if (!quiet) log(chalk.green(`Search criteria is [${lendingCriteria}]`))
     if (!quiet) log(chalk.green('Launching browser'))
     const browser = await chromium.launch({
       headless: !headfull
@@ -51,9 +69,9 @@ const log = console.log;
     await page.click('text=sign in to Kiva');
     await page.waitForTimeout(1000);
     await page.click('input[name="email"]');
-    await page.fill('input[name="email"]', process.env.EMAIL);
+    await page.fill('input[name="email"]', kivaEmail);
     await page.press('input[name="email"]', 'Tab');
-    await page.fill('input[name="password"]', process.env.PASSWORD);
+    await page.fill('input[name="password"]', kivaPassword);
     await page.press('input[name="password"]', 'Enter');
     await page.waitForTimeout(500);
 
@@ -61,9 +79,9 @@ const log = console.log;
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
     if (Number(amount) >= lendingAmount) {
-      if (!quiet) log(chalk.green('Searching'))
-      const filter = `${lendingCriteria}`
-      await page.goto('https://www.kiva.org/lend/?' + filter)
+      if (!quiet) log(chalk.green(`Searching for "${lendingCriteria}"`))
+
+      await page.goto(`https://www.kiva.org/lend/?${lendingCriteria}`)
       await page.waitForTimeout(1500);
     
       const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
@@ -92,7 +110,7 @@ const log = console.log;
       if (!quiet) log(chalk.green(`Total value ${total_value}`));
       if (total_value != `${lendingAmount}.00`) {    
         log(chalk.red(`Error: Total value was expected to be $25.00 but found: ${total_value}`));
-        process.exit(-1)
+        process.exit(4)
       }
 
       if (!quiet) log(chalk.green('Completing the order'))
@@ -100,11 +118,14 @@ const log = console.log;
         await page.click('button#kiva-credit-payment-button')
         await page.waitForTimeout(1500)
         log(chalk.green(`Info: Lended ${total_value} to ${borrower_name} from ${borrower_country}`));
+        process.exit(1);
       } else {
         if (!quiet) log(chalk.red('(DRYRUN) click button#kiva-credit-payment-button'));
+        process.exit(2);
       }
     } else {
       log(chalk.red(`Info: $${amount} not enough to lend`));
+      process.exit(3);
     }
 
     if (!quiet) log(chalk.green('Closing'))
