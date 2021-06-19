@@ -30,8 +30,8 @@ const log = console.log;
       process.exit(-1)
     }
 
-    const lendingAmount = 25
-    const lendingCriteria = 'country=kg,tj&sector=1'
+    const lendingAmount = 25 // set the amount to lend here
+    const lendingCriteria = '&sortBy=amountLeft' // set your own criteria here
 
     if (!quiet) log(chalk.green('Launching browser'))
     const browser = await chromium.launch({
@@ -62,7 +62,7 @@ const log = console.log;
 
     if (Number(amount) >= lendingAmount) {
       if (!quiet) log(chalk.green('Searching'))
-      const filter = `${lendingCriteria}&sortBy=amountLeft`
+      const filter = `${lendingCriteria}`
       await page.goto('https://www.kiva.org/lend/?' + filter)
       await page.waitForTimeout(1500);
     
