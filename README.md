@@ -10,4 +10,4 @@ Usage:
 
 \> set PASSWORD=\<your kiva password\>
 
-\> node index.js
+\> node kiva.js

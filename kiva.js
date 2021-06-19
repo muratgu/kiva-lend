@@ -101,7 +101,6 @@ const log = console.log;
   }
 
   if (!quiet) log(chalk.green('Signing out'))
-  await page.goto('https://www.kiva.org/logout')
   
   await context.close()
   await browser.close()
