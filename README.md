@@ -54,7 +54,8 @@ Kivabot will pick the first loan among the ones found on the lending search page
 The search criteria is specified in environment variable KIVA_CRITERIA. To replace it, do the following:
 1) Navigate to page https://www.kiva.org/lend? (pick the `classic` loan explorer)
 2) Pick any search criteria. The browser url will change accordingly. Copy the query parameters on the url.
-3) Set the KIVA_CRITERIA to the copied value
+3) Set the KIVA_CRITERIA to the copied value.
+
       For example, if you searched for loans for women in agriculture sorted by amount left,
       the setting would be:
       > KIVA_CRITERIA="gender=female&sector=1&sortBy=amountLeft"
