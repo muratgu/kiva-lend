@@ -91,7 +91,7 @@ const log = console.log;
       if (!quiet) log(chalk.green(`${borrower_name} from ${borrower_country}. ${borrower_use}`));
 
       if (!quiet) log(chalk.green(`Lending ${lendingAmount}`))
-      await page.click(`text=Lend ${lendingAmount}`)
+      await page.click(`text=Lend $${lendingAmount}`)
 
       if (!quiet) log(chalk.green('Checking out'))
       // Click text=Checkout now
@@ -108,7 +108,7 @@ const log = console.log;
 
       const total_value = await (await page.textContent('.total-value')).replace('(','').replace(')','')
       if (!quiet) log(chalk.green(`Total value ${total_value}`));
-      if (total_value != `${lendingAmount}.00`) {    
+      if (total_value != `$${lendingAmount}.00`) {    
         log(chalk.red(`Error: Total value was expected to be $25.00 but found: ${total_value}`));
         process.exit(4)
       }
