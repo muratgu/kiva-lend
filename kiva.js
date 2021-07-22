@@ -124,14 +124,15 @@ const log = console.log;
         process.exit(2);
       }
     } else {
-      log(chalk.red(`Info: $${amount} not enough to lend`));
-      process.exit(3);
+      log(chalk.red(`Info: $${amount} not enough to lend`));      
     }
 
     if (!quiet) log(chalk.green('Closing'))
     
     await context.close()
     await browser.close()
+
+    process.exit();
 
   } catch(e) {
 

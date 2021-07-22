@@ -4,7 +4,7 @@
   "description": "Autolends $25 to first kiva loan found",
   "main": "kiva.js",
   "scripts": {
-    "lend": "node kiva.js"
+    "lend": "node kiva.js --for-real"
   },
   "author": "",
   "license": "ISC",
