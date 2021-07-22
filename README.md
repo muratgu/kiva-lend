@@ -4,6 +4,8 @@ Automate lending in Kiva.
 
 If available, it lends $25 to first loan applicant found.
 
+![Scheduled Lending](https://github.com/muratgu/kivabot/actions/workflows/main.yml/badge.svg)
+
 # Usage
 ```console
 set KIVA_EMAIL=<your kiva email>
