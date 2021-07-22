@@ -78,18 +78,18 @@ const log = console.log;
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
+    if (!quiet) log(chalk.green(`Searching for "${lendingCriteria}"`))
+
+    await page.goto(`https://www.kiva.org/lend/?${lendingCriteria}`)
+    await page.waitForTimeout(1500);
+  
+    const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
+    const borrower_country = await (await page.textContent('.loan-card-2-country')).trim()
+    const borrower_use = await (await page.textContent('.loan-card-2-use')).trim()
+
+    if (!quiet) log(chalk.green(`${borrower_name} from ${borrower_country}. ${borrower_use}`));
+
     if (Number(amount) >= lendingAmount) {
-      if (!quiet) log(chalk.green(`Searching for "${lendingCriteria}"`))
-
-      await page.goto(`https://www.kiva.org/lend/?${lendingCriteria}`)
-      await page.waitForTimeout(1500);
-    
-      const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
-      const borrower_country = await (await page.textContent('.loan-card-2-country')).trim()
-      const borrower_use = await (await page.textContent('.loan-card-2-use')).trim()
-
-      if (!quiet) log(chalk.green(`${borrower_name} from ${borrower_country}. ${borrower_use}`));
-
       if (!quiet) log(chalk.green(`Lending ${lendingAmount}`))
       await page.click(`text=Lend $${lendingAmount}`)
 
