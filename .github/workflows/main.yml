@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  push:
-    branches:
-    - master
+  schedule:
+    # everyday Thursday @ 10am
+    - cron: '0 10 * * 4'
 
 jobs:
   lend-first:
