@@ -1,0 +1,25 @@
+name: Scheduled Lending
+
+on:
+  schedule:
+    # everyday Thursday @ 10am
+    - cron: '0 10 * * 4'
+
+jobs:
+  lend-first:
+    runs-on: ubuntu-latest # or macos-latest, windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+
+      - name: Install playwright
+        run: npx playwright install-deps chromium
+
+      - name: Install dependencies and run tests
+        env:  
+          KIVA_EMAIL: ${{ secrets.KIVA_EMAIL }}
+          KIVA_PASSWORD: ${{ secrets.KIVA_PASSWORD }}
+          KIVA_CRITERIA: ${{ secrets.KIVA_CRITERIA }}
+        run: npm install && npm run lend
