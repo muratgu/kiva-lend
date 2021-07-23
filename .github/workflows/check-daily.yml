@@ -1,8 +1,8 @@
-name: Scheduled Lending
+name: Check Daily
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 21 * * *'
 
 jobs:
   lend-first:
