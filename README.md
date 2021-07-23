@@ -4,7 +4,7 @@ Automate lending in Kiva.
 
 If available, it lends $25 to first loan applicant found.
 
-![Scheduled Lending](https://github.com/muratgu/kivabot/actions/workflows/main.yml/badge.svg)
+![Daily Lending](https://github.com/muratgu/kivabot/actions/workflows/check-daily.yml/badge.svg)
 
 # Usage
 ```console
@@ -62,3 +62,7 @@ The search criteria is specified in environment variable KIVA_CRITERIA. To repla
       For example, if you searched for loans for women in agriculture sorted by amount left,
       the setting would be:
       > KIVA_CRITERIA="gender=female&sector=1&sortBy=amountLeft"
+
+## Using the workflow
+
+This repo has a github action setup to run the lending on a daily schedule (or manually). The result of the run is logged in the [journal](journal.md).
