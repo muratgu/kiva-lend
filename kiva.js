@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const figlet = require('figlet')
 const clear = require('clear')
 const chalk = require('chalk')
+const fs = require('fs');
+
 const log = console.log;
 
 (async () => {
@@ -86,8 +88,11 @@ const log = console.log;
     const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
     const borrower_country = await (await page.textContent('.loan-card-2-country')).trim()
     const borrower_use = await (await page.textContent('.loan-card-2-use')).trim()
+    const lending_date = (new Date()).toISOString().substr(0, 10);
 
-    if (!quiet) log(chalk.green(`${borrower_name} from ${borrower_country}. ${borrower_use}`));
+    let lending_info = `Found ${borrower_name} from ${borrower_country}. ${borrower_use}`;
+    if (!quiet) log(chalk.green(`Info: ${lending_info}`));
+    fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);   
 
     if (Number(amount) >= lendingAmount) {
       if (!quiet) log(chalk.green(`Lending ${lendingAmount}`))
@@ -110,21 +115,26 @@ const log = console.log;
       if (!quiet) log(chalk.green(`Total value ${total_value}`));
       if (total_value != `$${lendingAmount}.00`) {    
         log(chalk.red(`Error: Total value was expected to be $25.00 but found: ${total_value}`));
-        process.exit(4)
+        process.exit(-1)
       }
 
       if (!quiet) log(chalk.green('Completing the order'))
+      
       if (for_real) {
         await page.click('button#kiva-credit-payment-button')
         await page.waitForTimeout(1500)
-        log(chalk.green(`Info: Lended ${total_value} to ${borrower_name} from ${borrower_country}`));
-        process.exit(1);
+        
+        lending_info = `Lended ${total_value} to ${borrower_name} from ${borrower_country}`;
+        log(chalk.green(`Info: ${lending_info}`));
+        fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);
       } else {
         if (!quiet) log(chalk.red('(DRYRUN) click button#kiva-credit-payment-button'));
-        process.exit(2);
+        process.exit(-1);
       }
     } else {
-      log(chalk.red(`Info: $${amount} not enough to lend`));      
+      lending_info = `$${amount} not enough to lend`;
+      log(chalk.red(`Info: ${lending_info}`)); 
+      fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);     
     }
 
     if (!quiet) log(chalk.green('Closing'))

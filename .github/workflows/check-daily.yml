@@ -22,3 +22,10 @@ jobs:
           KIVA_PASSWORD: ${{ secrets.KIVA_PASSWORD }}
           KIVA_CRITERIA: ${{ secrets.KIVA_CRITERIA }}
         run: npm install && npm run lend
+
+      - name: Update resources
+        uses: muratgu/action-update-file@v1
+        with:
+            file-path: journal.md
+            commit-msg: Update journal
+            github-token: ${{ secrets.GITHUB_TOKEN }}
