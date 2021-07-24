@@ -88,11 +88,8 @@ const log = console.log;
     const borrower_name = await (await page.textContent('.loan-card-2-borrower-name')).trim()
     const borrower_country = await (await page.textContent('.loan-card-2-country')).trim()
     const borrower_use = await (await page.textContent('.loan-card-2-use')).trim()
-    const lending_date = (new Date()).toISOString().substr(0, 10);
 
-    let lending_info = `Found ${borrower_name} from ${borrower_country}. ${borrower_use}`;
-    if (!quiet) log(chalk.green(`Info: ${lending_info}`));
-    fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);   
+    if (!quiet) log(chalk.green(`Info: Found ${borrower_name} from ${borrower_country}. ${borrower_use}`));
 
     if (Number(amount) >= lendingAmount) {
       if (!quiet) log(chalk.green(`Lending ${lendingAmount}`))
@@ -122,9 +119,9 @@ const log = console.log;
       
       if (for_real) {
         await page.click('button#kiva-credit-payment-button')
-        await page.waitForTimeout(1500)
-        
-        lending_info = `Lended ${total_value} to ${borrower_name} from ${borrower_country}`;
+        await page.waitForTimeout(1500)        
+        const lending_date = (new Date()).toISOString().substr(0, 10);
+        const lending_info = `Lended ${total_value} to ${borrower_name} from ${borrower_country}`;
         log(chalk.green(`Info: ${lending_info}`));
         fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);
       } else {
@@ -132,9 +129,7 @@ const log = console.log;
         process.exit(-1);
       }
     } else {
-      lending_info = `$${amount} not enough to lend`;
-      log(chalk.red(`Info: ${lending_info}`)); 
-      fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);     
+      log(chalk.red(`Info: $${amount} not enough to lend`));       
     }
 
     if (!quiet) log(chalk.green('Closing'))
