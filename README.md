@@ -1,6 +1,6 @@
-# kivabot
+# Kiva-Lend
 
-Automate lending in Kiva. 
+Automated lending in Kiva. 
 
 If available, it lends $25 to first loan applicant found.
 
