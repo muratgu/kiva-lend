@@ -30,11 +30,11 @@ The above will do a dry-run. It will tell you if it found a loan to lend but wil
 # Example
 ```pre
 > node kiva.js
- _  __  _                   ____            _
- | |/ / (_) __   __   __ _  | __ )    ___   | |_ 
- | ' /  | | \ \ / /  / _` | |  _ \   / _ \  | __|
- | . \  | |  \ V /  | (_| | | |_) | | (_) | | |_ 
- |_|\_\ |_|   \_/    \__,_| |____/   \___/   \__|
+  _  __  _                           _                          _
+ | |/ / (_) __   __   __ _          | |       ___   _ __     __| |
+ | ' /  | | \ \ / /  / _` |  _____  | |      / _ \ | '_ \   / _` |
+ | . \  | |  \ V /  | (_| | |_____| | |___  |  __/ | | | | | (_| |
+ |_|\_\ |_|   \_/    \__,_|         |_____|  \___| |_| |_|  \__,_|
 
 Dry run (--for-real to turn off)
 Headless (--headfull to turn off)

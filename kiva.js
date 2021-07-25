@@ -15,7 +15,7 @@ const log = console.log;
 
     const quiet = process.argv.find(x => x == '--quiet' || x == '-q')
     if (!quiet) clear()
-    if (!quiet) log(chalk.green(figlet.textSync('KivaBot', { horizontalLayout: 'full' }) ));
+    if (!quiet) log(chalk.green(figlet.textSync('Kiva-Lend', { horizontalLayout: 'full' }) ));
     
     const for_real = process.argv.find(x => x == '--for-real')
     if (!quiet) log(chalk.blue(for_real?'For real':'Dry run (--for-real to turn off)'));

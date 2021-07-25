@@ -1,5 +1,5 @@
 {
-  "name": "kivabot",
+  "name": "kiva-lend",
   "version": "1.0.0",
   "description": "Autolends $25 to first kiva loan found",
   "main": "kiva.js",
