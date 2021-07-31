@@ -2,8 +2,8 @@ name: Check Daily
 
 on: 
   workflow_dispatch:
-  schedule:
-    - cron: '0 21 * * *'
+  schedule:    
+     - cron: '19 7 */4 * *'
 
 jobs:
   lend-first:
