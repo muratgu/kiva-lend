@@ -121,7 +121,7 @@ const log = console.log;
         await page.click('button#kiva-credit-payment-button')
         await page.waitForTimeout(1500)        
         const lending_date = (new Date()).toISOString().substr(0, 10);
-        const lending_info = `Lended ${total_value} to ${borrower_name} from ${borrower_country}`;
+        const lending_info = `Lended ${total_value} to ${borrower_name} from ${borrower_country}. ${borrower_use}`;
         log(chalk.green(`Info: ${lending_info}`));
         fs.appendFileSync('journal.md', `${lending_date} ${lending_info}\n\n`);
       } else {
