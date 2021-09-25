@@ -11,19 +11,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-
+      - uses: actions/setup-node@v1      
+        with:
+          node-version: '14'      
       - name: Install playwright
-        run: npx playwright install-deps chromium
-
+        run: |
+          npm install 
+          npx playwright install-deps chromium
       - name: Install dependencies and run 
         env:  
           KIVA_EMAIL: ${{ secrets.KIVA_EMAIL }}
           KIVA_PASSWORD: ${{ secrets.KIVA_PASSWORD }}
           KIVA_CRITERIA: ${{ secrets.KIVA_CRITERIA }}
         run: npm install && npm run lend
-
       - name: Update journal
         uses: muratgu/action-update-file@v1
         with:
