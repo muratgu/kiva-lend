@@ -103,7 +103,7 @@ const log = console.log;
       ]);
 
       if (!quiet) log(chalk.green('Removing the donation to Kiva'))
-      await page.click('text=$3.75 Edit Donation');
+      await page.click('button.donation-amount');
       // Click text=No donation to Kiva
       await page.click('text=No donation to Kiva');
       await page.waitForTimeout(1500);
