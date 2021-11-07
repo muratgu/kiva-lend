@@ -5,3 +5,5 @@
 
 2021-10-21 Lended $25.00 to Meerimbu from Kyrgyzstan. A loan of $600 helps to purchase dairy cow to increase her headcount of cattle and sales of organic ...
 
+2021-11-07 Lended $25.00 to Sultanaly from Kyrgyzstan. A loan of $200 helps to buy some cattle and to increase his income from cattle breeding.
+
