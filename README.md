@@ -4,7 +4,7 @@ Automated lending in Kiva.
 
 If available, it lends $25 to first loan applicant found.
 
-![Daily Lending](https://github.com/muratgu/kivabot/actions/workflows/check-daily.yml/badge.svg)
+![Daily Lending](https://github.com/muratgu/kiva-lend/actions/workflows/check-daily.yml/badge.svg)
 
 # Usage
 ```console
@@ -50,7 +50,7 @@ Info: $11 not enough to lend
 
 ## How do I pick where to lend?
 
-Kivabot will pick the first loan among the ones found on the lending search page.
+Kiva-Lend will pick the first loan among the ones found on the lending search page.
 
 ## How do I specify the search criteria?
 
