@@ -7,3 +7,5 @@
 
 2021-11-07 Lended $25.00 to Sultanaly from Kyrgyzstan. A loan of $200 helps to buy some cattle and to increase his income from cattle breeding.
 
+2021-11-21 Lended $25.00 to Oktomkan from Kyrgyzstan. A loan of $300 helps to buy some dairy cows and increase her income from the sales of organic milk.
+
