@@ -9,3 +9,5 @@
 
 2021-11-21 Lended $25.00 to Oktomkan from Kyrgyzstan. A loan of $300 helps to buy some dairy cows and increase her income from the sales of organic milk.
 
+2021-11-25 Lended $25.00 to Mirbek from Kyrgyzstan. A loan of $600 helps to buy livestock to increase his income from breeding livestock.
+
