@@ -11,3 +11,5 @@
 
 2021-11-25 Lended $25.00 to Mirbek from Kyrgyzstan. A loan of $600 helps to buy livestock to increase his income from breeding livestock.
 
+2021-12-21 Lended $25.00 to Cholpon from Kyrgyzstan. A loan of $725 helps to purchase some livestock and increase her income from livestock breeding.
+
