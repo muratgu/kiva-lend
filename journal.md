@@ -15,3 +15,5 @@
 
 2022-01-05 Lended $25.00 to Sagynbek from Kyrgyzstan. A loan of $325 helps to increase his livestock headcount and buy livestock feed in order to grow his...
 
+2022-01-09 Lended $25.00 to Saparbek from Kyrgyzstan. A loan of $375 helps to buy livestock to increase his income from raising livestock.
+
