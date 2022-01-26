@@ -75,16 +75,15 @@ const log = console.log;
     await page.fill('input[name="password"]', kivaPassword);
     await page.press('input[name="password"]', 'Enter');
 
+    await page.waitForTimeout(5000);
+        
+    var pageTitle = await page.title();
+    if (pageTitle != 'Portfolio | Kiva') {
+      log(chalk.red(`Info: Cannot open portfolio page. The title says "${pageTitle}"`));       
+      process.exit(-1)
+    }
     if (!quiet) log(chalk.green('Logged in'));
     
-    await page.waitForTimeout(1000);
-    await page.goto('https://www.kiva.org/portfolio');
-    await page.waitForTimeout(1000);
-    
-    var pageTitle = await page.title();
-    if (!quiet) log(chalk.green(`Page title = $${pageTitle}`));
-    if (pageTitle == 'Portfolio | Kiva') {
-      
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
@@ -138,10 +137,6 @@ const log = console.log;
       }
     } else {
       log(chalk.red(`Info: $${amount} not enough to lend`));       
-    }
-
-    } else {
-      log(chalk.red(`Info: Cannot open portfolio page. The title is $${pageTitle}`));       
     }
   
     if (!quiet) log(chalk.green('Closing'))
