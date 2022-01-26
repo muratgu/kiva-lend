@@ -77,7 +77,11 @@ const log = console.log;
 
     if (!quiet) log(chalk.green('Logged in'));
     
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(1000);
+    await page.goto('https://www.kiva.org/portfolio');
+    await page.waitForTimeout(1000);
+    await expect(page).toHaveTitle('Portfolio | Kiva');
+    
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
