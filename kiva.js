@@ -63,19 +63,29 @@ const log = console.log;
     if (!quiet) log(chalk.green('Navigating to https://www.kiva.org/'))
     await page.goto('https://www.kiva.org/');
     
-    if (!quiet) log(chalk.green('Logging in'))
     await Promise.all([
       page.waitForNavigation(),
-      page.click('text=Log in')
+      page.click('text=Log in'),
+      page.waitForTimeout(1000)
     ]);
-    await page.waitForTimeout(5000);
+
+    const lnkLogin = await page.$('a.login-link');
+    if (lnkLogin) {
+      if (!quiet) log(chalk.green('Opening the signin page'))
+      await page.click('a.login-link');
+      await page.waitForTimeout(1000);
+    }
+
+    if (!quiet) log(chalk.green('Entering userid / password'));    
+    
     await page.click('input[name="email"]');
     await page.fill('input[name="email"]', kivaEmail);
     await page.press('input[name="email"]', 'Tab');
     await page.fill('input[name="password"]', kivaPassword);
     await page.press('input[name="password"]', 'Enter');
 
-    await page.waitForTimeout(5000);
+    await page.waitForNavigation();
+    await page.waitForTimeout(1000);
         
     var pageTitle = await page.title();
     if (pageTitle != 'Portfolio | Kiva') {
