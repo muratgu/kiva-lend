@@ -17,3 +17,5 @@
 
 2022-01-09 Lended $25.00 to Saparbek from Kyrgyzstan. A loan of $375 helps to buy livestock to increase his income from raising livestock.
 
+2022-01-26 Lended $25.00 to Nurzida from Kyrgyzstan. A loan of $600 helps to buy livestock to increase her income from raising livestock.
+
