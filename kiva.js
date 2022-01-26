@@ -63,12 +63,11 @@ const log = console.log;
     if (!quiet) log(chalk.green('Navigating to https://www.kiva.org/'))
     await page.goto('https://www.kiva.org/');
     
-    if (!quiet) log(chalk.green('Signing in'))
+    if (!quiet) log(chalk.green('Logging in'))
     await Promise.all([
       page.waitForNavigation(),
-      page.click('text=Sign in')
+      page.click('text=Log in')
     ]);
-    await page.click('text=sign in to Kiva');
     await page.waitForTimeout(1000);
     await page.click('input[name="email"]');
     await page.fill('input[name="email"]', kivaEmail);
