@@ -82,7 +82,7 @@ const log = console.log;
     await page.waitForTimeout(1000);
     
     var pageTitle = await page.title();
-    if (!quiet) log(chalk.green('Page title = ' + pageTitle);
+    if (!quiet) log(chalk.green(`Page title = $${pageTitle}`));
     if (pageTitle == 'Portfolio | Kiva') {
       
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
