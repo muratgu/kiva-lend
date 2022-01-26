@@ -68,7 +68,7 @@ const log = console.log;
       page.waitForNavigation(),
       page.click('text=Log in')
     ]);
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(5000);
     await page.click('input[name="email"]');
     await page.fill('input[name="email"]', kivaEmail);
     await page.press('input[name="email"]', 'Tab');
