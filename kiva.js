@@ -74,8 +74,10 @@ const log = console.log;
     await page.press('input[name="email"]', 'Tab');
     await page.fill('input[name="password"]', kivaPassword);
     await page.press('input[name="password"]', 'Enter');
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
 
+    if (!quiet) log(chalk.green('Logged in'));
+    
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
