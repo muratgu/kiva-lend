@@ -80,8 +80,11 @@ const log = console.log;
     await page.waitForTimeout(1000);
     await page.goto('https://www.kiva.org/portfolio');
     await page.waitForTimeout(1000);
-    await expect(page).toHaveTitle('Portfolio | Kiva');
     
+    var pageTitle = await page.title();
+    if (!quiet) log(chalk.green('Page title = ' + pageTitle);
+    if (pageTitle == 'Portfolio | Kiva') {
+      
     const amount = await (await page.textContent('a.header-button.my-kiva .amount')).replace('$','')
     if (!quiet) log(chalk.green('Amount left = ' + amount));
 
@@ -137,6 +140,10 @@ const log = console.log;
       log(chalk.red(`Info: $${amount} not enough to lend`));       
     }
 
+    } else {
+      log(chalk.red(`Info: Cannot open portfolio page. The title is $${pageTitle}`));       
+    }
+  
     if (!quiet) log(chalk.green('Closing'))
     
     await context.close()
